@@ -1,0 +1,52 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto";
+
+package grpc;
+
+message AddKendaraanReq{
+    string KodeKendaraan=1;
+    string JenisKendaraan = 2;
+    string NomorPlat =3;
+    int32 Status=4;
+    string CreateBy = 5;
+}
+
+message ReadKendaraanByNomorPlatReq{
+    string NomorPlat = 1;
+}
+
+message ReadKendaraanByNomorPlatResp{
+    string KodeKendaraan=1;
+    string JenisKendaraan = 2;
+    string NomorPlat =3;
+    int32 Status=4;
+    string CreateBy = 5;
+}
+ 
+message ReadKendaraanResp{
+    repeated ReadKendaraanByNomorPlatResp allKendaraan = 1;
+}
+ 
+message UpdateKendaraanReq{
+    string KodeKendaraan=1;
+    string JenisKendaraan = 2;
+    string NomorPlat =3; 
+    int32 Status=4;
+    string UpdateBy = 5;
+}
+message ReadKendaraanByNoPlatReq{
+    string NomorPlat = 1;
+}
+message ReadKendaraanByNoPlatResp{
+    repeated ReadKendaraanByNomorPlatResp allNoPlat = 1;
+}
+
+service KendaraanService{
+    rpc AddKendaraan(AddKendaraanReq) returns (google.protobuf.Empty) {};
+    rpc ReadKendaraanByNomorPlat(ReadKendaraanByNomorPlatReq) returns (ReadKendaraanByNomorPlatResp) {};
+    rpc ReadKendaraan(google.protobuf.Empty) returns (ReadKendaraanResp){};
+    rpc UpdateKendaraan(UpdateKendaraanReq) returns (google.protobuf.Empty){};
+    rpc ReadKendaraanByNoPlat(ReadKendaraanByNoPlatReq) returns (ReadKendaraanByNoPlatResp) {};
+    
+}

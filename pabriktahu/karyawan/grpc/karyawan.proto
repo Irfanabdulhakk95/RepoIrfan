@@ -1,0 +1,47 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto";
+
+package grpc;
+
+message AddKaryawanReq{
+    string NamaKaryawan=1;
+    int32 IdAgama = 2;
+    string Alamat =3;
+    string JenisKelamin=4;
+    int32 Status=5;
+    string CreateBy = 6;
+}
+
+message ReadKaryawanByNamaReq{
+    string NamaKaryawan = 1;
+}
+
+message ReadKaryawanByNamaResp{
+    string NamaKaryawan = 1;
+    int32 IdAgama=2;
+    string Alamat =3;
+    string JenisKelamin=4;
+    int32 Status=5;
+    string CreateBy = 6;
+}
+
+message ReadKaryawanResp{
+    repeated ReadKaryawanByNamaResp allKaryawan = 1;
+}
+
+message UpdateKaryawanReq{
+    string NamaKaryawan=1;
+    int32 IdAgama=2;
+    string Alamat =3;
+    string JenisKelamin=4;
+    int32 Status=5;
+    string UpdateBy = 6;
+}
+
+service KaryawanService{
+    rpc AddKaryawan(AddKaryawanReq) returns (google.protobuf.Empty) {};
+    rpc ReadKaryawanByNama(ReadKaryawanByNamaReq) returns (ReadKaryawanByNamaResp) {};
+    rpc ReadKaryawan(google.protobuf.Empty) returns (ReadKaryawanResp){};
+    rpc UpdateKaryawan(UpdateKaryawanReq) returns (google.protobuf.Empty){};
+}

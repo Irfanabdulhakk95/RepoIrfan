@@ -1,0 +1,57 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto";
+
+package grpc;
+
+message AddUserReq{
+    string Username=1;
+    string Password= 2;
+    string IDKaryawan=3;
+    int32 Status=4;
+    string CreatedBy = 5; 
+    string Keterangan = 6;
+}  
+
+message ReadUserByKetReq{ 
+    string Keterangan=1;
+}
+
+message ReadUserByKetResp{ 
+    repeated ReadUserByKet allKet = 1;
+}
+
+message ReadUserByKet{
+    string Username=1;
+    string Password=2;
+    string IDKaryawan=3;
+    int32 Status=4;
+    string CreatedBy=5;
+    string CreatedOn=6; 
+    string UpdatedOn=7;
+    string UpdatedBy=8; 
+    string Keterangan=9;
+}
+
+message ReadUserResp{
+    repeated ReadUserByKet allUser = 1;
+}  
+
+
+
+
+message UpdateUserReq{ 
+    string Username = 1;
+    string Password=2;
+    string IDKaryawan=3;
+    int32 Status=4;
+    string UpdatedBy = 5;
+    string Keterangan = 6;
+} 
+
+service UserService{
+    rpc AddUser(AddUserReq) returns (google.protobuf.Empty) {};
+    rpc ReadUserByKet(ReadUserByKetReq) returns (ReadUserByKetResp) {}; 
+    rpc ReadUser(google.protobuf.Empty) returns (ReadUserResp){};
+    rpc UpdateUser(UpdateUserReq) returns (google.protobuf.Empty){};
+} 

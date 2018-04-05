@@ -1,0 +1,43 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto";
+
+package grpc;
+
+message AddInventoriReq{
+    string KodeInventori=1;
+    string NamaInventori = 2;
+    int32 Jumlah =3;
+    int32 Status=4;
+    string CreateBy = 5;
+}
+
+message ReadInventoriByNamaInventoriReq{
+    string NamaInventori = 1;
+}
+
+message ReadInventoriByNamaInventoriResp{
+    string KodeInventori=1;
+    string NamaInventori = 2;
+    int32 Jumlah =3;
+    int32 Status=4;
+    string CreateBy = 5;}
+
+message ReadInventoriResp{
+    repeated ReadInventoriByNamaInventoriResp allInventori = 1;
+}
+
+message UpdateInventoriReq{
+    string KodeInventori=1;
+    string NamaInventori = 2;
+    int32 Jumlah =3;
+    int32 Status=4;
+    string UpdateBy = 5;
+}
+
+service InventoriService{
+    rpc AddInventori(AddInventoriReq) returns (google.protobuf.Empty) {};
+    rpc ReadInventoriByNamaInventori(ReadInventoriByNamaInventoriReq) returns (ReadInventoriByNamaInventoriResp) {};
+    rpc ReadInventori(google.protobuf.Empty) returns (ReadInventoriResp){};
+    rpc UpdateInventori(UpdateInventoriReq) returns (google.protobuf.Empty){};
+}
